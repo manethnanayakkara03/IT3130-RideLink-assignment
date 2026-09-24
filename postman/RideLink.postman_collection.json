@@ -1,0 +1,546 @@
+{
+  "info": {
+    "name": "RideLink Microservices API Collection",
+    "_postman_id": "ridelink-microservices-collection",
+    "description": "Comprehensive Postman test collection for RideLink 4-Microservice Backend Platform (IT3130 Group Assignment)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 Authentication",
+      "item": [
+        {
+          "name": "Register Passenger",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('passengerId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Nimal\",\n  \"lastName\": \"Perera\",\n  \"email\": \"nimal.passenger@example.com\",\n  \"phone\": \"0771234567\",\n  \"password\": \"Pass1234!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/passenger", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "passenger"] }
+          }
+        },
+        {
+          "name": "Register Driver Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('driverAccountId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Sunil\",\n  \"lastName\": \"Fernando\",\n  \"email\": \"sunil.driver@example.com\",\n  \"phone\": \"0719876543\",\n  \"password\": \"DriverPass123!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/driver", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "driver"] }
+          }
+        },
+        {
+          "name": "Login as Passenger",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('passengerToken', jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nimal.passenger@example.com\",\n  \"password\": \"Pass1234!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Login as Driver",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('driverToken', jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sunil.driver@example.com\",\n  \"password\": \"DriverPass123!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Accounts",
+      "item": [
+        {
+          "name": "Get Account Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{passengerToken}}" }],
+            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{passengerId}}"] }
+          }
+        },
+        {
+          "name": "Update Account Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{passengerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Nimal Updated\",\n  \"lastName\": \"Perera\",\n  \"phone\": \"0779998888\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{passengerId}}"] }
+          }
+        },
+        {
+          "name": "Interservice - Check Account Exists",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{driverAccountId}}/exists", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{driverAccountId}}", "exists"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Driver Profiles",
+      "item": [
+        {
+          "name": "Create Driver Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('driverId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": {{driverAccountId}},\n  \"licenseNumber\": \"B9876543\",\n  \"serviceArea\": \"Colombo\",\n  \"latitude\": 6.9271,\n  \"longitude\": 79.8612\n}"
+            },
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers"] }
+          }
+        },
+        {
+          "name": "Get Driver Profile",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}"] }
+          }
+        },
+        {
+          "name": "Update Driver Availability (AVAILABLE)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"AVAILABLE\"\n}"
+            },
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/availability", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "availability"] }
+          }
+        },
+        {
+          "name": "Update Driver Location",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 6.9319,\n  \"longitude\": 79.8478,\n  \"serviceArea\": \"Colombo Fort\"\n}"
+            },
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/location", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "location"] }
+          }
+        },
+        {
+          "name": "Get Available Drivers",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers/available", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "available"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Vehicles",
+      "item": [
+        {
+          "name": "Register Vehicle",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('vehicleId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"driverId\": {{driverId}},\n  \"registrationNumber\": \"WP-CBA-9988\",\n  \"make\": \"Toyota\",\n  \"model\": \"Prius\",\n  \"vehicleType\": \"SEDAN\",\n  \"colour\": \"Pearl White\",\n  \"seatCapacity\": 4\n}"
+            },
+            "url": { "raw": "{{driverServiceUrl}}/api/vehicles", "host": ["{{driverServiceUrl}}"], "path": ["api", "vehicles"] }
+          }
+        },
+        {
+          "name": "Get Vehicle By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{driverServiceUrl}}/api/vehicles/{{vehicleId}}", "host": ["{{driverServiceUrl}}"], "path": ["api", "vehicles", "{{vehicleId}}"] }
+          }
+        },
+        {
+          "name": "Get Vehicles by Driver ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/vehicles", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "vehicles"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Fare Estimation",
+      "item": [
+        {
+          "name": "Estimate Fare",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distanceKm\": 8.5,\n  \"estimatedMinutes\": 18.0\n}"
+            },
+            "url": { "raw": "{{fareServiceUrl}}/api/fares/estimate", "host": ["{{fareServiceUrl}}"], "path": ["api", "fares", "estimate"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Ride Requests",
+      "item": [
+        {
+          "name": "Create Ride Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('rideId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passengerId\": {{passengerId}},\n  \"pickupLocation\": \"Bambalapitiya, Colombo 04\",\n  \"pickupLatitude\": 6.8920,\n  \"pickupLongitude\": 79.8562,\n  \"destination\": \"World Trade Center, Colombo 01\",\n  \"destinationLatitude\": 6.9332,\n  \"destinationLongitude\": 79.8436\n}"
+            },
+            "url": { "raw": "{{rideServiceUrl}}/api/rides", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides"] }
+          }
+        },
+        {
+          "name": "Get Ride By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}"] }
+          }
+        },
+        {
+          "name": "Get Passenger Ride History",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/passenger/{{passengerId}}", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "passenger", "{{passengerId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Ride Assignment",
+      "item": [
+        {
+          "name": "Assign Driver (Interservice)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Ride status is ASSIGNED', function () { pm.expect(pm.response.json().status).to.eql('ASSIGNED'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/assign", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "assign"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Ride Lifecycle",
+      "item": [
+        {
+          "name": "Accept Ride",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/accept", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "accept"] }
+          }
+        },
+        {
+          "name": "Start Ride",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/start", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "start"] }
+          }
+        },
+        {
+          "name": "Complete Ride",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "complete"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 Payments",
+      "item": [
+        {
+          "name": "Simulate Successful Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set('paymentId', jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideId\": {{rideId}},\n  \"passengerId\": {{passengerId}},\n  \"amount\": 830.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": false\n}"
+            },
+            "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
+          }
+        },
+        {
+          "name": "Get Payment by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{fareServiceUrl}}/api/payments/{{paymentId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments", "{{paymentId}}"] }
+          }
+        },
+        {
+          "name": "Get Payment for Ride",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{fareServiceUrl}}/api/payments/ride/{{rideId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments", "ride", "{{rideId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 Receipts",
+      "item": [
+        {
+          "name": "Get Receipt by Payment ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{fareServiceUrl}}/api/receipts/{{paymentId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "receipts", "{{paymentId}}"] }
+          }
+        },
+        {
+          "name": "Get Receipt by Ride ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{fareServiceUrl}}/api/receipts/ride/{{rideId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "receipts", "ride", "{{rideId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 Negative Tests",
+      "item": [
+        {
+          "name": "Negative 1 - Duplicate Email Registration",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 409 Conflict', function () { pm.response.to.have.status(409); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Nimal\",\n  \"lastName\": \"Perera\",\n  \"email\": \"nimal.passenger@example.com\",\n  \"phone\": \"0771234567\",\n  \"password\": \"Pass1234!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/passenger", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "passenger"] }
+          }
+        },
+        {
+          "name": "Negative 2 - Invalid Login Bad Credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 401 Unauthorized', function () { pm.response.to.have.status(401); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nimal.passenger@example.com\",\n  \"password\": \"WrongPassword!\"\n}"
+            },
+            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Negative 3 - Invalid Ride Lifecycle Transition (Complete when not IN_PROGRESS)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 400 Bad Request', function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "complete"] }
+          }
+        },
+        {
+          "name": "Negative 4 - Simulate Payment Authorization Failure",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Payment status is FAILED', function () { pm.expect(pm.response.json().status).to.eql('FAILED'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideId\": 999,\n  \"passengerId\": 1,\n  \"amount\": 500.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": true\n}"
+            },
+            "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
+          }
+        },
+        {
+          "name": "Negative 5 - Non-existent Ride ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 404 Not Found', function () { pm.response.to.have.status(404); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{rideServiceUrl}}/api/rides/99999", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "99999"] }
+          }
+        }
+      ]
+    }
+  ]
+}
