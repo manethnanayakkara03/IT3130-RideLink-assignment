@@ -108,8 +108,13 @@ The microservices operate out of the box connecting to MongoDB on `localhost:270
 
 | Environment Variable | Service | Default Value | Description |
 |---|---|---|---|
-| `MONGODB_HOST` | All Services | `localhost` | MongoDB host address |
-| `MONGODB_PORT` | All Services | `27017` | MongoDB port number |
+| `MONGODB_URI` | All Services | `mongodb://localhost:27017` | Base MongoDB URI (supports MongoDB Atlas cloud clusters) |
+| `MONGODB_ACCOUNT_URI` | Account Service | Derived from base | Dedicated Atlas URI for Account database |
+| `MONGODB_DRIVER_URI` | Driver Service | Derived from base | Dedicated Atlas URI for Driver database |
+| `MONGODB_RIDE_URI` | Ride Service | Derived from base | Dedicated Atlas URI for Ride database |
+| `MONGODB_FARE_URI` | Fare Service | Derived from base | Dedicated Atlas URI for Fare database |
+| `MONGODB_HOST` | All Services | `localhost` | MongoDB host address (standalone) |
+| `MONGODB_PORT` | All Services | `27017` | MongoDB port number (standalone) |
 | `MONGODB_ACCOUNT_DATABASE` | Account Service | `ridelink_account_db` | Dedicated Account database |
 | `MONGODB_DRIVER_DATABASE` | Driver Service | `ridelink_driver_db` | Dedicated Driver/Vehicle database |
 | `MONGODB_RIDE_DATABASE` | Ride Service | `ridelink_ride_db` | Dedicated Ride database |

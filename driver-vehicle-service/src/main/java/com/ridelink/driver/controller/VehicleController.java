@@ -74,4 +74,15 @@ public class VehicleController {
     public ResponseEntity<List<VehicleResponse>> getVehiclesByDriverId(@PathVariable String driverId) {
         return ResponseEntity.ok(vehicleService.getVehiclesByDriverId(driverId));
     }
+
+    @DeleteMapping("/api/vehicles/{id}")
+    @Operation(summary = "Delete vehicle", description = "Deletes a vehicle record by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Vehicle deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Vehicle not found")
+    })
+    public ResponseEntity<Void> deleteVehicle(@PathVariable String id) {
+        vehicleService.deleteVehicle(id);
+        return ResponseEntity.noContent().build();
+    }
 }

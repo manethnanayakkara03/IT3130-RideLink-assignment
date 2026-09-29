@@ -6,8 +6,7 @@ spring:
     name: driver-vehicle-service
   data:
     mongodb:
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27017}
+      uri: ${MONGODB_DRIVER_URI:${MONGODB_URI:mongodb://${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_DRIVER_DATABASE:ridelink_driver_db}}}
       database: ${MONGODB_DRIVER_DATABASE:ridelink_driver_db}
       auto-index-creation: true
 

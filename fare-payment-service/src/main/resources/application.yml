@@ -6,8 +6,7 @@ spring:
     name: fare-payment-service
   data:
     mongodb:
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27017}
+      uri: ${MONGODB_FARE_URI:${MONGODB_URI:mongodb://${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_FARE_DATABASE:ridelink_fare_payment_db}}}
       database: ${MONGODB_FARE_DATABASE:ridelink_fare_payment_db}
       auto-index-creation: true
 

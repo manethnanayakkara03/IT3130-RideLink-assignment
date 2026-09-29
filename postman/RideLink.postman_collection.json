@@ -26,12 +26,28 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Nimal\",\n  \"lastName\": \"Perera\",\n  \"email\": \"nimal.passenger@example.com\",\n  \"phone\": \"0771234567\",\n  \"password\": \"Pass1234!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/passenger", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "passenger"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/register/passenger",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register",
+                "passenger"
+              ]
+            }
           }
         },
         {
@@ -51,12 +67,28 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Sunil\",\n  \"lastName\": \"Fernando\",\n  \"email\": \"sunil.driver@example.com\",\n  \"phone\": \"0719876543\",\n  \"password\": \"DriverPass123!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/driver", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "driver"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/register/driver",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register",
+                "driver"
+              ]
+            }
           }
         },
         {
@@ -76,12 +108,27 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"nimal.passenger@example.com\",\n  \"password\": \"Pass1234!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/login",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
           }
         },
         {
@@ -101,12 +148,27 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"sunil.driver@example.com\",\n  \"password\": \"DriverPass123!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/login",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
           }
         }
       ]
@@ -118,8 +180,23 @@
           "name": "Get Account Profile",
           "request": {
             "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{passengerToken}}" }],
-            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{passengerId}}"] }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{passengerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "{{passengerId}}"
+              ]
+            }
           }
         },
         {
@@ -127,21 +204,48 @@
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{passengerToken}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{passengerToken}}"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Nimal Updated\",\n  \"lastName\": \"Perera\",\n  \"phone\": \"0779998888\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{passengerId}}"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/accounts/{{passengerId}}",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "{{passengerId}}"
+              ]
+            }
           }
         },
         {
           "name": "Interservice - Check Account Exists",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{accountServiceUrl}}/api/accounts/{{driverAccountId}}/exists", "host": ["{{accountServiceUrl}}"], "path": ["api", "accounts", "{{driverAccountId}}", "exists"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/accounts/{{driverAccountId}}/exists",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "{{driverAccountId}}",
+                "exists"
+              ]
+            }
           }
         }
       ]
@@ -166,50 +270,183 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"accountId\": \"{{driverAccountId}}\",\n  \"licenseNumber\": \"B9876543\",\n  \"serviceArea\": \"Colombo\",\n  \"latitude\": 6.9271,\n  \"longitude\": 79.8612\n}"
             },
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
           }
         },
         {
           "name": "Get Driver Profile",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}"
+              ]
+            }
           }
         },
         {
           "name": "Update Driver Availability (AVAILABLE)",
           "request": {
             "method": "PATCH",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"status\": \"AVAILABLE\"\n}"
             },
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/availability", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "availability"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/availability",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}",
+                "availability"
+              ]
+            }
           }
         },
         {
           "name": "Update Driver Location",
           "request": {
             "method": "PATCH",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"latitude\": 6.9319,\n  \"longitude\": 79.8478,\n  \"serviceArea\": \"Colombo Fort\"\n}"
             },
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/location", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "location"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/location",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}",
+                "location"
+              ]
+            }
           }
         },
         {
           "name": "Get Available Drivers",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers/available", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "available"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/available",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "available"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Driver Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licenseNumber\": \"B9876543-REV\",\n  \"serviceArea\": \"Greater Colombo\"\n}"
+            },
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Driver Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}"
+              ]
+            }
           }
         }
       ]
@@ -234,26 +471,128 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"driverId\": \"{{driverId}}\",\n  \"registrationNumber\": \"WP-CBA-9988\",\n  \"make\": \"Toyota\",\n  \"model\": \"Prius\",\n  \"vehicleType\": \"SEDAN\",\n  \"colour\": \"Pearl White\",\n  \"seatCapacity\": 4\n}"
             },
-            "url": { "raw": "{{driverServiceUrl}}/api/vehicles", "host": ["{{driverServiceUrl}}"], "path": ["api", "vehicles"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/vehicles",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles"
+              ]
+            }
           }
         },
         {
           "name": "Get Vehicle By ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{driverServiceUrl}}/api/vehicles/{{vehicleId}}", "host": ["{{driverServiceUrl}}"], "path": ["api", "vehicles", "{{vehicleId}}"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            }
           }
         },
         {
           "name": "Get Vehicles by Driver ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/vehicles", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers", "{{driverId}}", "vehicles"] }
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/drivers/{{driverId}}/vehicles",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}",
+                "vehicles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Vehicle",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"make\": \"Toyota\",\n  \"model\": \"Prius Prime\",\n  \"vehicleType\": \"SEDAN\",\n  \"colour\": \"Metallic Black\",\n  \"seatCapacity\": 4,\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Vehicle",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{driverServiceUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{driverServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            }
           }
         }
       ]
@@ -265,12 +604,27 @@
           "name": "Estimate Fare",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"distanceKm\": 8.5,\n  \"estimatedMinutes\": 18.0\n}"
             },
-            "url": { "raw": "{{fareServiceUrl}}/api/fares/estimate", "host": ["{{fareServiceUrl}}"], "path": ["api", "fares", "estimate"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/fares/estimate",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "fares",
+                "estimate"
+              ]
+            }
           }
         }
       ]
@@ -295,26 +649,61 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"passengerId\": \"{{passengerId}}\",\n  \"pickupLocation\": \"Bambalapitiya, Colombo 04\",\n  \"pickupLatitude\": 6.8920,\n  \"pickupLongitude\": 79.8562,\n  \"destination\": \"World Trade Center, Colombo 01\",\n  \"destinationLatitude\": 6.9332,\n  \"destinationLongitude\": 79.8436\n}"
             },
-            "url": { "raw": "{{rideServiceUrl}}/api/rides", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides"
+              ]
+            }
           }
         },
         {
           "name": "Get Ride By ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}"
+              ]
+            }
           }
         },
         {
           "name": "Get Passenger Ride History",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/passenger/{{passengerId}}", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "passenger", "{{passengerId}}"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/passenger/{{passengerId}}",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "passenger",
+                "{{passengerId}}"
+              ]
+            }
           }
         }
       ]
@@ -338,7 +727,18 @@
           ],
           "request": {
             "method": "POST",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/assign", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "assign"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/assign",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "assign"
+              ]
+            }
           }
         }
       ]
@@ -350,21 +750,54 @@
           "name": "Accept Ride",
           "request": {
             "method": "POST",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/accept", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "accept"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/accept",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "accept"
+              ]
+            }
           }
         },
         {
           "name": "Start Ride",
           "request": {
             "method": "POST",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/start", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "start"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/start",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "start"
+              ]
+            }
           }
         },
         {
           "name": "Complete Ride",
           "request": {
             "method": "POST",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "complete"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "complete"
+              ]
+            }
           }
         }
       ]
@@ -389,26 +822,61 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideId\": \"{{rideId}}\",\n  \"passengerId\": \"{{passengerId}}\",\n  \"amount\": 830.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": false\n}"
             },
-            "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/payments",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
           }
         },
         {
           "name": "Get Payment by ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{fareServiceUrl}}/api/payments/{{paymentId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments", "{{paymentId}}"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/payments/{{paymentId}}",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "{{paymentId}}"
+              ]
+            }
           }
         },
         {
           "name": "Get Payment for Ride",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{fareServiceUrl}}/api/payments/ride/{{rideId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments", "ride", "{{rideId}}"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/payments/ride/{{rideId}}",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "ride",
+                "{{rideId}}"
+              ]
+            }
           }
         }
       ]
@@ -420,14 +888,35 @@
           "name": "Get Receipt by Payment ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{fareServiceUrl}}/api/receipts/{{paymentId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "receipts", "{{paymentId}}"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/receipts/{{paymentId}}",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "receipts",
+                "{{paymentId}}"
+              ]
+            }
           }
         },
         {
           "name": "Get Receipt by Ride ID",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{fareServiceUrl}}/api/receipts/ride/{{rideId}}", "host": ["{{fareServiceUrl}}"], "path": ["api", "receipts", "ride", "{{rideId}}"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/receipts/ride/{{rideId}}",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "receipts",
+                "ride",
+                "{{rideId}}"
+              ]
+            }
           }
         }
       ]
@@ -450,12 +939,28 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Nimal\",\n  \"lastName\": \"Perera\",\n  \"email\": \"nimal.passenger@example.com\",\n  \"phone\": \"0771234567\",\n  \"password\": \"Pass1234!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/register/passenger", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "register", "passenger"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/register/passenger",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register",
+                "passenger"
+              ]
+            }
           }
         },
         {
@@ -473,12 +978,27 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"nimal.passenger@example.com\",\n  \"password\": \"WrongPassword!\"\n}"
             },
-            "url": { "raw": "{{accountServiceUrl}}/api/auth/login", "host": ["{{accountServiceUrl}}"], "path": ["api", "auth", "login"] }
+            "url": {
+              "raw": "{{accountServiceUrl}}/api/auth/login",
+              "host": [
+                "{{accountServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
           }
         },
         {
@@ -496,7 +1016,18 @@
           ],
           "request": {
             "method": "POST",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "{{rideId}}", "complete"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/{{rideId}}/complete",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "complete"
+              ]
+            }
           }
         },
         {
@@ -514,12 +1045,26 @@
           ],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideId\": \"ride-nonexistent-999\",\n  \"passengerId\": \"usr-nonexistent-1\",\n  \"amount\": 500.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": true\n}"
             },
-            "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
+            "url": {
+              "raw": "{{fareServiceUrl}}/api/payments",
+              "host": [
+                "{{fareServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
           }
         },
         {
@@ -537,7 +1082,17 @@
           ],
           "request": {
             "method": "GET",
-            "url": { "raw": "{{rideServiceUrl}}/api/rides/99999", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides", "99999"] }
+            "url": {
+              "raw": "{{rideServiceUrl}}/api/rides/99999",
+              "host": [
+                "{{rideServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "99999"
+              ]
+            }
           }
         }
       ]

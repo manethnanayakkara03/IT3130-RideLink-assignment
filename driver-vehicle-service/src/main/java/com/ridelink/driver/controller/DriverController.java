@@ -98,4 +98,15 @@ public class DriverController {
             @RequestParam(required = false) String serviceArea) {
         return ResponseEntity.ok(driverService.getAvailableDrivers(serviceArea));
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete driver profile", description = "Deletes a driver profile by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Driver profile deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Driver profile not found")
+    })
+    public ResponseEntity<Void> deleteDriver(@PathVariable String id) {
+        driverService.deleteDriver(id);
+        return ResponseEntity.noContent().build();
+    }
 }
