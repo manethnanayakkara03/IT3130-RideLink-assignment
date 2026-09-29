@@ -6,8 +6,7 @@ spring:
     name: ride-management-service
   data:
     mongodb:
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27017}
+      uri: ${MONGODB_RIDE_URI:${MONGODB_URI:mongodb://${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_RIDE_DATABASE:ridelink_ride_db}}}
       database: ${MONGODB_RIDE_DATABASE:ridelink_ride_db}
       auto-index-creation: true
 
