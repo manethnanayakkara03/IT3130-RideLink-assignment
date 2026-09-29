@@ -82,7 +82,7 @@ flowchart TB
 - **Core Framework**: Spring Boot 3.2.5
 - **Web Layer**: Spring Web MVC
 - **Security**: Spring Security 6 with BCrypt password hashing & JWT (`io.jsonwebtoken:jjwt:0.12.5`)
-- **Persistence**: Spring Data JPA with isolated in-memory H2 databases (compatible with PostgreSQL/MySQL)
+- **Persistence**: Spring Data MongoDB with 4 independent isolated MongoDB databases (`ridelink_account_db`, `ridelink_driver_db`, `ridelink_ride_db`, `ridelink_fare_payment_db`)
 - **Validation**: Jakarta Bean Validation (`spring-boot-starter-validation`)
 - **HTTP Client**: Modern Spring `RestClient` for synchronous interservice REST calls
 - **API Documentation**: Springdoc OpenAPI 2.3.0 / Swagger UI
@@ -104,10 +104,16 @@ flowchart TB
 
 ## 5. Environment Variables & Configuration
 
-The microservices operate out of the box with default zero-configuration local profiles. In production or containerized environments, the following environment variables can be customized:
+The microservices operate out of the box connecting to MongoDB on `localhost:27017` with isolated databases. In production or containerized environments, the following environment variables can be customized:
 
 | Environment Variable | Service | Default Value | Description |
 |---|---|---|---|
+| `MONGODB_HOST` | All Services | `localhost` | MongoDB host address |
+| `MONGODB_PORT` | All Services | `27017` | MongoDB port number |
+| `MONGODB_ACCOUNT_DATABASE` | Account Service | `ridelink_account_db` | Dedicated Account database |
+| `MONGODB_DRIVER_DATABASE` | Driver Service | `ridelink_driver_db` | Dedicated Driver/Vehicle database |
+| `MONGODB_RIDE_DATABASE` | Ride Service | `ridelink_ride_db` | Dedicated Ride database |
+| `MONGODB_FARE_DATABASE` | Fare Service | `ridelink_fare_payment_db` | Dedicated Fare & Payment database |
 | `JWT_SECRET` | Account Service | Base64-encoded 256-bit key | Secret key used for signing and verifying JWT tokens |
 | `ACCOUNT_SERVICE_URL` | Driver Service | `http://localhost:8081` | Base URL for Account Service interservice communication |
 | `DRIVER_SERVICE_URL` | Ride Service | `http://localhost:8082` | Base URL for Driver Service interservice communication |
