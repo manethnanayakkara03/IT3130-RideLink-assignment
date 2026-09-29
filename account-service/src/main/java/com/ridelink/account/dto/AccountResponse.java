@@ -7,7 +7,7 @@ import com.ridelink.account.model.User;
 import java.time.LocalDateTime;
 
 public class AccountResponse {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -32,11 +32,11 @@ public class AccountResponse {
         this.updatedAt = user.getUpdatedAt();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

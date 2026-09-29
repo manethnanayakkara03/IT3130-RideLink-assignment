@@ -33,7 +33,7 @@ public class AccountController {
                     content = @Content(schema = @Schema(implementation = AccountResponse.class))),
             @ApiResponse(responseCode = "404", description = "Account not found")
     })
-    public ResponseEntity<AccountResponse> getAccountById(@PathVariable Long id) {
+    public ResponseEntity<AccountResponse> getAccountById(@PathVariable String id) {
         return ResponseEntity.ok(accountService.getAccountById(id));
     }
 
@@ -44,7 +44,7 @@ public class AccountController {
                     content = @Content(schema = @Schema(implementation = AccountResponse.class))),
             @ApiResponse(responseCode = "404", description = "Account not found")
     })
-    public ResponseEntity<AccountResponse> updateAccount(@PathVariable Long id,
+    public ResponseEntity<AccountResponse> updateAccount(@PathVariable String id,
                                                          @Valid @RequestBody AccountUpdateRequest request) {
         return ResponseEntity.ok(accountService.updateAccount(id, request));
     }
@@ -57,7 +57,7 @@ public class AccountController {
             @ApiResponse(responseCode = "403", description = "Forbidden - requires ADMIN role"),
             @ApiResponse(responseCode = "404", description = "Account not found")
     })
-    public ResponseEntity<AccountResponse> updateAccountStatus(@PathVariable Long id,
+    public ResponseEntity<AccountResponse> updateAccountStatus(@PathVariable String id,
                                                                @Valid @RequestBody AccountStatusUpdateRequest request) {
         return ResponseEntity.ok(accountService.updateAccountStatus(id, request.getStatus()));
     }
@@ -68,7 +68,7 @@ public class AccountController {
             @ApiResponse(responseCode = "200", description = "Verification result returned",
                     content = @Content(schema = @Schema(implementation = ExistsResponse.class)))
     })
-    public ResponseEntity<ExistsResponse> verifyAccountExists(@PathVariable Long id) {
+    public ResponseEntity<ExistsResponse> verifyAccountExists(@PathVariable String id) {
         return ResponseEntity.ok(accountService.verifyAccountExists(id));
     }
 }

@@ -5,7 +5,7 @@ import com.ridelink.account.model.Role;
 public class AuthResponse {
     private String token;
     private String tokenType = "Bearer";
-    private Long id;
+    private String id;
     private String email;
     private String firstName;
     private String lastName;
@@ -14,7 +14,7 @@ public class AuthResponse {
     public AuthResponse() {
     }
 
-    public AuthResponse(String token, Long id, String email, String firstName, String lastName, Role role) {
+    public AuthResponse(String token, String id, String email, String firstName, String lastName, Role role) {
         this.token = token;
         this.id = id;
         this.email = email;
@@ -39,11 +39,11 @@ public class AuthResponse {
         this.tokenType = tokenType;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

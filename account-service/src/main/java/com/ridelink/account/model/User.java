@@ -1,46 +1,33 @@
 package com.ridelink.account.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "users")
+@Document(collection = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, length = 100)
     private String firstName;
-
-    @Column(nullable = false, length = 100)
     private String lastName;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Indexed(unique = true)
     private String email;
 
-    @Column(nullable = false, length = 30)
     private String phone;
-
-    @Column(nullable = false)
     private String passwordHash;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
     private Role role;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
     private AccountStatus status;
-
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     public User() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public User(String firstName, String lastName, String email, String phone,
@@ -52,27 +39,15 @@ public class User {
         this.passwordHash = passwordHash;
         this.role = role;
         this.status = status;
-    }
-
-    @PrePersist
-    protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = AccountStatus.ACTIVE;
-        }
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -82,6 +57,7 @@ public class User {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getLastName() {
@@ -90,6 +66,7 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getEmail() {
@@ -106,6 +83,7 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getPasswordHash() {
@@ -130,6 +108,7 @@ public class User {
 
     public void setStatus(AccountStatus status) {
         this.status = status;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public LocalDateTime getCreatedAt() {

@@ -95,14 +95,13 @@ public class AccountService {
         );
     }
 
-    @Transactional(readOnly = true)
-    public AccountResponse getAccountById(Long id) {
+    public AccountResponse getAccountById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found with ID: " + id));
         return new AccountResponse(user);
     }
 
-    public AccountResponse updateAccount(Long id, AccountUpdateRequest request) {
+    public AccountResponse updateAccount(String id, AccountUpdateRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found with ID: " + id));
 
@@ -114,7 +113,7 @@ public class AccountService {
         return new AccountResponse(updatedUser);
     }
 
-    public AccountResponse updateAccountStatus(Long id, AccountStatus status) {
+    public AccountResponse updateAccountStatus(String id, AccountStatus status) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found with ID: " + id));
 
@@ -123,8 +122,7 @@ public class AccountService {
         return new AccountResponse(updatedUser);
     }
 
-    @Transactional(readOnly = true)
-    public ExistsResponse verifyAccountExists(Long id) {
+    public ExistsResponse verifyAccountExists(String id) {
         return userRepository.findById(id)
                 .map(u -> new ExistsResponse(true, u.getId(), u.getRole(), u.getStatus()))
                 .orElse(new ExistsResponse(false, null, null, null));
