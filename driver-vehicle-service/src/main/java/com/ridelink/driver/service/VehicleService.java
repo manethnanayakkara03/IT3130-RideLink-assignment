@@ -79,4 +79,11 @@ public class VehicleService {
                 .map(VehicleResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public void deleteVehicle(String id) {
+        if (!vehicleRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Vehicle not found with ID: " + id);
+        }
+        vehicleRepository.deleteById(id);
+    }
 }

@@ -117,4 +117,11 @@ public class DriverService {
                 .map(DriverProfileResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public void deleteDriver(String id) {
+        if (!driverProfileRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Driver profile not found with ID: " + id);
+        }
+        driverProfileRepository.deleteById(id);
+    }
 }
