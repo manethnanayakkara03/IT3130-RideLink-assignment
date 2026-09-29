@@ -169,7 +169,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"accountId\": {{driverAccountId}},\n  \"licenseNumber\": \"B9876543\",\n  \"serviceArea\": \"Colombo\",\n  \"latitude\": 6.9271,\n  \"longitude\": 79.8612\n}"
+              "raw": "{\n  \"accountId\": \"{{driverAccountId}}\",\n  \"licenseNumber\": \"B9876543\",\n  \"serviceArea\": \"Colombo\",\n  \"latitude\": 6.9271,\n  \"longitude\": 79.8612\n}"
             },
             "url": { "raw": "{{driverServiceUrl}}/api/drivers", "host": ["{{driverServiceUrl}}"], "path": ["api", "drivers"] }
           }
@@ -237,7 +237,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"driverId\": {{driverId}},\n  \"registrationNumber\": \"WP-CBA-9988\",\n  \"make\": \"Toyota\",\n  \"model\": \"Prius\",\n  \"vehicleType\": \"SEDAN\",\n  \"colour\": \"Pearl White\",\n  \"seatCapacity\": 4\n}"
+              "raw": "{\n  \"driverId\": \"{{driverId}}\",\n  \"registrationNumber\": \"WP-CBA-9988\",\n  \"make\": \"Toyota\",\n  \"model\": \"Prius\",\n  \"vehicleType\": \"SEDAN\",\n  \"colour\": \"Pearl White\",\n  \"seatCapacity\": 4\n}"
             },
             "url": { "raw": "{{driverServiceUrl}}/api/vehicles", "host": ["{{driverServiceUrl}}"], "path": ["api", "vehicles"] }
           }
@@ -298,7 +298,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"passengerId\": {{passengerId}},\n  \"pickupLocation\": \"Bambalapitiya, Colombo 04\",\n  \"pickupLatitude\": 6.8920,\n  \"pickupLongitude\": 79.8562,\n  \"destination\": \"World Trade Center, Colombo 01\",\n  \"destinationLatitude\": 6.9332,\n  \"destinationLongitude\": 79.8436\n}"
+              "raw": "{\n  \"passengerId\": \"{{passengerId}}\",\n  \"pickupLocation\": \"Bambalapitiya, Colombo 04\",\n  \"pickupLatitude\": 6.8920,\n  \"pickupLongitude\": 79.8562,\n  \"destination\": \"World Trade Center, Colombo 01\",\n  \"destinationLatitude\": 6.9332,\n  \"destinationLongitude\": 79.8436\n}"
             },
             "url": { "raw": "{{rideServiceUrl}}/api/rides", "host": ["{{rideServiceUrl}}"], "path": ["api", "rides"] }
           }
@@ -392,7 +392,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"rideId\": {{rideId}},\n  \"passengerId\": {{passengerId}},\n  \"amount\": 830.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": false\n}"
+              "raw": "{\n  \"rideId\": \"{{rideId}}\",\n  \"passengerId\": \"{{passengerId}}\",\n  \"amount\": 830.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": false\n}"
             },
             "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
           }
@@ -517,7 +517,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"rideId\": 999,\n  \"passengerId\": 1,\n  \"amount\": 500.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": true\n}"
+              "raw": "{\n  \"rideId\": \"ride-nonexistent-999\",\n  \"passengerId\": \"usr-nonexistent-1\",\n  \"amount\": 500.0,\n  \"paymentMethod\": \"SIMULATED_CARD\",\n  \"simulateFailure\": true\n}"
             },
             "url": { "raw": "{{fareServiceUrl}}/api/payments", "host": ["{{fareServiceUrl}}"], "path": ["api", "payments"] }
           }
