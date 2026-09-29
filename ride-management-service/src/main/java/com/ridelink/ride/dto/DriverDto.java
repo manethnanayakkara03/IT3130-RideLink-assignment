@@ -1,8 +1,8 @@
 package com.ridelink.ride.dto;
 
 public class DriverDto {
-    private Long id;
-    private Long accountId;
+    private String id;
+    private String accountId;
     private String licenseNumber;
     private String availabilityStatus;
     private String serviceArea;
@@ -12,19 +12,19 @@ public class DriverDto {
     public DriverDto() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

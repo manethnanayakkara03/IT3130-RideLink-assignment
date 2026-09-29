@@ -41,7 +41,7 @@ public class DriverServiceClient {
         }
     }
 
-    public void updateDriverAvailability(Long driverId, String status) {
+    public void updateDriverAvailability(String driverId, String status) {
         try {
             restClient.patch()
                     .uri("/api/drivers/{id}/availability", driverId)

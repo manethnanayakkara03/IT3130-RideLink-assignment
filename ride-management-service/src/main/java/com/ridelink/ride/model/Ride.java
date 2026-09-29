@@ -1,48 +1,38 @@
 package com.ridelink.ride.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "rides")
+@Document(collection = "rides")
 public class Ride {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
-    private Long passengerId;
+    private String passengerId;
 
-    private Long driverId;
+    private String driverId;
 
-    @Column(nullable = false, length = 150)
     private String pickupLocation;
 
-    @Column(nullable = false)
     private Double pickupLatitude;
 
-    @Column(nullable = false)
     private Double pickupLongitude;
 
-    @Column(nullable = false, length = 150)
     private String destination;
 
-    @Column(nullable = false)
     private Double destinationLatitude;
 
-    @Column(nullable = false)
     private Double destinationLongitude;
 
     private Double estimatedFare;
 
     private Double finalFare;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
     private RideStatus status;
 
-    @Column(nullable = false, updatable = false)
     private LocalDateTime requestedAt;
 
     private LocalDateTime assignedAt;
@@ -60,7 +50,7 @@ public class Ride {
     public Ride() {
     }
 
-    public Ride(Long passengerId, String pickupLocation, Double pickupLatitude, Double pickupLongitude,
+    public Ride(String passengerId, String pickupLocation, Double pickupLatitude, Double pickupLongitude,
                 String destination, Double destinationLatitude, Double destinationLongitude,
                 Double estimatedFare) {
         this.passengerId = passengerId;
@@ -72,37 +62,30 @@ public class Ride {
         this.destinationLongitude = destinationLongitude;
         this.estimatedFare = estimatedFare;
         this.status = RideStatus.REQUESTED;
-    }
-
-    @PrePersist
-    protected void onCreate() {
         this.requestedAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = RideStatus.REQUESTED;
-        }
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public void setPassengerId(Long passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 
-    public Long getDriverId() {
+    public String getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Long driverId) {
+    public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
 

@@ -47,7 +47,7 @@ public class RideController {
                     content = @Content(schema = @Schema(implementation = RideResponse.class))),
             @ApiResponse(responseCode = "404", description = "Ride not found")
     })
-    public ResponseEntity<RideResponse> getRideById(@PathVariable Long id) {
+    public ResponseEntity<RideResponse> getRideById(@PathVariable String id) {
         return ResponseEntity.ok(rideService.getRideById(id));
     }
 
@@ -59,7 +59,7 @@ public class RideController {
             @ApiResponse(responseCode = "400", description = "Invalid ride state for assignment"),
             @ApiResponse(responseCode = "404", description = "No available driver found or ride not found")
     })
-    public ResponseEntity<RideResponse> assignDriver(@PathVariable Long id) {
+    public ResponseEntity<RideResponse> assignDriver(@PathVariable String id) {
         return ResponseEntity.ok(rideService.assignDriver(id));
     }
 
@@ -71,7 +71,7 @@ public class RideController {
             @ApiResponse(responseCode = "400", description = "Invalid transition: ride is not in ASSIGNED state"),
             @ApiResponse(responseCode = "404", description = "Ride not found")
     })
-    public ResponseEntity<RideResponse> acceptRide(@PathVariable Long id) {
+    public ResponseEntity<RideResponse> acceptRide(@PathVariable String id) {
         return ResponseEntity.ok(rideService.acceptRide(id));
     }
 
@@ -83,7 +83,7 @@ public class RideController {
             @ApiResponse(responseCode = "400", description = "Invalid transition: ride is not in ACCEPTED state"),
             @ApiResponse(responseCode = "404", description = "Ride not found")
     })
-    public ResponseEntity<RideResponse> startRide(@PathVariable Long id) {
+    public ResponseEntity<RideResponse> startRide(@PathVariable String id) {
         return ResponseEntity.ok(rideService.startRide(id));
     }
 
@@ -95,7 +95,7 @@ public class RideController {
             @ApiResponse(responseCode = "400", description = "Invalid transition: ride is not in IN_PROGRESS state"),
             @ApiResponse(responseCode = "404", description = "Ride not found")
     })
-    public ResponseEntity<RideResponse> completeRide(@PathVariable Long id) {
+    public ResponseEntity<RideResponse> completeRide(@PathVariable String id) {
         return ResponseEntity.ok(rideService.completeRide(id));
     }
 
@@ -107,20 +107,20 @@ public class RideController {
             @ApiResponse(responseCode = "400", description = "Invalid transition: completed or in-progress rides cannot be cancelled"),
             @ApiResponse(responseCode = "404", description = "Ride not found")
     })
-    public ResponseEntity<RideResponse> cancelRide(@PathVariable Long id,
+    public ResponseEntity<RideResponse> cancelRide(@PathVariable String id,
                                                    @Valid @RequestBody CancelRideRequest request) {
         return ResponseEntity.ok(rideService.cancelRide(id, request));
     }
 
     @GetMapping("/passenger/{passengerId}")
     @Operation(summary = "Get ride history for passenger", description = "Retrieves all rides requested by a passenger")
-    public ResponseEntity<List<RideResponse>> getRidesByPassengerId(@PathVariable Long passengerId) {
+    public ResponseEntity<List<RideResponse>> getRidesByPassengerId(@PathVariable String passengerId) {
         return ResponseEntity.ok(rideService.getRidesByPassengerId(passengerId));
     }
 
     @GetMapping("/driver/{driverId}")
     @Operation(summary = "Get ride history for driver", description = "Retrieves all rides assigned to a driver")
-    public ResponseEntity<List<RideResponse>> getRidesByDriverId(@PathVariable Long driverId) {
+    public ResponseEntity<List<RideResponse>> getRidesByDriverId(@PathVariable String driverId) {
         return ResponseEntity.ok(rideService.getRidesByDriverId(driverId));
     }
 }

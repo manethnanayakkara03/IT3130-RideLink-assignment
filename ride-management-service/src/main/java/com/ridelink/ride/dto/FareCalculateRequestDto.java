@@ -1,24 +1,24 @@
 package com.ridelink.ride.dto;
 
 public class FareCalculateRequestDto {
-    private Long rideId;
+    private String rideId;
     private Double distanceKm;
     private Double durationMinutes;
 
     public FareCalculateRequestDto() {
     }
 
-    public FareCalculateRequestDto(Long rideId, Double distanceKm, Double durationMinutes) {
+    public FareCalculateRequestDto(String rideId, Double distanceKm, Double durationMinutes) {
         this.rideId = rideId;
         this.distanceKm = distanceKm;
         this.durationMinutes = durationMinutes;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 
