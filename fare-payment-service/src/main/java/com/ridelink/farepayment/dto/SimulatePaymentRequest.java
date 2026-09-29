@@ -6,11 +6,11 @@ import jakarta.validation.constraints.NotNull;
 
 public class SimulatePaymentRequest {
 
-    @NotNull(message = "Ride ID is required")
-    private Long rideId;
+    @NotBlank(message = "Ride ID is required")
+    private String rideId;
 
-    @NotNull(message = "Passenger ID is required")
-    private Long passengerId;
+    @NotBlank(message = "Passenger ID is required")
+    private String passengerId;
 
     @NotNull(message = "Amount is required")
     @DecimalMin(value = "1.0", message = "Payment amount must be greater than 0")
@@ -24,7 +24,7 @@ public class SimulatePaymentRequest {
     public SimulatePaymentRequest() {
     }
 
-    public SimulatePaymentRequest(Long rideId, Long passengerId, Double amount, String paymentMethod, boolean simulateFailure) {
+    public SimulatePaymentRequest(String rideId, String passengerId, Double amount, String paymentMethod, boolean simulateFailure) {
         this.rideId = rideId;
         this.passengerId = passengerId;
         this.amount = amount;
@@ -32,19 +32,19 @@ public class SimulatePaymentRequest {
         this.simulateFailure = simulateFailure;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 
-    public Long getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public void setPassengerId(Long passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 

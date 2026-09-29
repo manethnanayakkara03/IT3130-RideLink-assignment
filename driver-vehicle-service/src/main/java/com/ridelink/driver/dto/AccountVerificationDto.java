@@ -2,14 +2,14 @@ package com.ridelink.driver.dto;
 
 public class AccountVerificationDto {
     private boolean exists;
-    private Long id;
+    private String id;
     private String role;
     private String status;
 
     public AccountVerificationDto() {
     }
 
-    public AccountVerificationDto(boolean exists, Long id, String role, String status) {
+    public AccountVerificationDto(boolean exists, String id, String role, String status) {
         this.exists = exists;
         this.id = id;
         this.role = role;
@@ -24,11 +24,11 @@ public class AccountVerificationDto {
         this.exists = exists;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

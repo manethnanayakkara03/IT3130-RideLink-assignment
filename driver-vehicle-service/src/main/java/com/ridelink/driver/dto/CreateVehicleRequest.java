@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class CreateVehicleRequest {
 
-    @NotNull(message = "Driver ID is required")
-    private Long driverId;
+    @NotBlank(message = "Driver ID is required")
+    private String driverId;
 
     @NotBlank(message = "Registration number is required")
     private String registrationNumber;
@@ -34,7 +34,7 @@ public class CreateVehicleRequest {
     public CreateVehicleRequest() {
     }
 
-    public CreateVehicleRequest(Long driverId, String registrationNumber, String make, String model,
+    public CreateVehicleRequest(String driverId, String registrationNumber, String make, String model,
                                 String vehicleType, String colour, Integer seatCapacity) {
         this.driverId = driverId;
         this.registrationNumber = registrationNumber;
@@ -45,11 +45,11 @@ public class CreateVehicleRequest {
         this.seatCapacity = seatCapacity;
     }
 
-    public Long getDriverId() {
+    public String getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Long driverId) {
+    public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
 

@@ -1,23 +1,15 @@
 server:
-  port: 8083
+  port: ${PORT:8083}
 
 spring:
   application:
     name: ride-management-service
-  datasource:
-    url: jdbc:h2:mem:ridelink_ride_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_RIDE_DATABASE:ridelink_ride_db}
+      auto-index-creation: true
 
 services:
   driver-service:

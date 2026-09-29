@@ -47,7 +47,7 @@ public class DriverController {
                     content = @Content(schema = @Schema(implementation = DriverProfileResponse.class))),
             @ApiResponse(responseCode = "404", description = "Driver profile not found")
     })
-    public ResponseEntity<DriverProfileResponse> getDriverById(@PathVariable Long id) {
+    public ResponseEntity<DriverProfileResponse> getDriverById(@PathVariable String id) {
         return ResponseEntity.ok(driverService.getDriverById(id));
     }
 
@@ -59,7 +59,7 @@ public class DriverController {
             @ApiResponse(responseCode = "404", description = "Driver profile not found"),
             @ApiResponse(responseCode = "409", description = "License number already registered by another driver")
     })
-    public ResponseEntity<DriverProfileResponse> updateDriver(@PathVariable Long id,
+    public ResponseEntity<DriverProfileResponse> updateDriver(@PathVariable String id,
                                                               @Valid @RequestBody UpdateDriverProfileRequest request) {
         return ResponseEntity.ok(driverService.updateDriver(id, request));
     }
@@ -71,7 +71,7 @@ public class DriverController {
                     content = @Content(schema = @Schema(implementation = DriverProfileResponse.class))),
             @ApiResponse(responseCode = "404", description = "Driver profile not found")
     })
-    public ResponseEntity<DriverProfileResponse> updateAvailability(@PathVariable Long id,
+    public ResponseEntity<DriverProfileResponse> updateAvailability(@PathVariable String id,
                                                                     @Valid @RequestBody UpdateAvailabilityRequest request) {
         return ResponseEntity.ok(driverService.updateAvailability(id, request.getStatus()));
     }
@@ -83,7 +83,7 @@ public class DriverController {
                     content = @Content(schema = @Schema(implementation = DriverProfileResponse.class))),
             @ApiResponse(responseCode = "404", description = "Driver profile not found")
     })
-    public ResponseEntity<DriverProfileResponse> updateLocation(@PathVariable Long id,
+    public ResponseEntity<DriverProfileResponse> updateLocation(@PathVariable String id,
                                                                 @Valid @RequestBody UpdateLocationRequest request) {
         return ResponseEntity.ok(driverService.updateLocation(id, request));
     }

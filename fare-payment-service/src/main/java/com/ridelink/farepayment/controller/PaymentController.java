@@ -44,7 +44,7 @@ public class PaymentController {
                     content = @Content(schema = @Schema(implementation = PaymentResponse.class))),
             @ApiResponse(responseCode = "404", description = "Payment not found")
     })
-    public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable Long id) {
+    public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable String id) {
         return ResponseEntity.ok(paymentService.getPaymentById(id));
     }
 
@@ -55,7 +55,7 @@ public class PaymentController {
                     content = @Content(schema = @Schema(implementation = PaymentResponse.class))),
             @ApiResponse(responseCode = "404", description = "Payment not found for ride")
     })
-    public ResponseEntity<PaymentResponse> getPaymentByRideId(@PathVariable Long rideId) {
+    public ResponseEntity<PaymentResponse> getPaymentByRideId(@PathVariable String rideId) {
         return ResponseEntity.ok(paymentService.getPaymentByRideId(rideId));
     }
 }

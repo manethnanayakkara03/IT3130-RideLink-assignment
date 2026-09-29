@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
 @Tag(name = "Vehicles", description = "Endpoints for vehicle registration and management")
 public class VehicleController {
 
@@ -49,7 +48,7 @@ public class VehicleController {
                     content = @Content(schema = @Schema(implementation = VehicleResponse.class))),
             @ApiResponse(responseCode = "404", description = "Vehicle not found")
     })
-    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable Long id) {
+    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable String id) {
         return ResponseEntity.ok(vehicleService.getVehicleById(id));
     }
 
@@ -60,7 +59,7 @@ public class VehicleController {
                     content = @Content(schema = @Schema(implementation = VehicleResponse.class))),
             @ApiResponse(responseCode = "404", description = "Vehicle not found")
     })
-    public ResponseEntity<VehicleResponse> updateVehicle(@PathVariable Long id,
+    public ResponseEntity<VehicleResponse> updateVehicle(@PathVariable String id,
                                                          @Valid @RequestBody UpdateVehicleRequest request) {
         return ResponseEntity.ok(vehicleService.updateVehicle(id, request));
     }
@@ -72,7 +71,7 @@ public class VehicleController {
                     content = @Content(schema = @Schema(implementation = VehicleResponse.class))),
             @ApiResponse(responseCode = "404", description = "Driver profile not found")
     })
-    public ResponseEntity<List<VehicleResponse>> getVehiclesByDriverId(@PathVariable Long driverId) {
+    public ResponseEntity<List<VehicleResponse>> getVehiclesByDriverId(@PathVariable String driverId) {
         return ResponseEntity.ok(vehicleService.getVehiclesByDriverId(driverId));
     }
 }

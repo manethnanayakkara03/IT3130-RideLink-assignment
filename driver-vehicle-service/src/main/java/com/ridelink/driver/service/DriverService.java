@@ -9,13 +9,11 @@ import com.ridelink.driver.model.AvailabilityStatus;
 import com.ridelink.driver.model.DriverProfile;
 import com.ridelink.driver.repository.DriverProfileRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class DriverService {
 
     private final DriverProfileRepository driverProfileRepository;
@@ -60,14 +58,13 @@ public class DriverService {
         return new DriverProfileResponse(saved);
     }
 
-    @Transactional(readOnly = true)
-    public DriverProfileResponse getDriverById(Long id) {
+    public DriverProfileResponse getDriverById(String id) {
         DriverProfile profile = driverProfileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Driver profile not found with ID: " + id));
         return new DriverProfileResponse(profile);
     }
 
-    public DriverProfileResponse updateDriver(Long id, UpdateDriverProfileRequest request) {
+    public DriverProfileResponse updateDriver(String id, UpdateDriverProfileRequest request) {
         DriverProfile profile = driverProfileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Driver profile not found with ID: " + id));
 
@@ -83,7 +80,7 @@ public class DriverService {
         return new DriverProfileResponse(updated);
     }
 
-    public DriverProfileResponse updateAvailability(Long id, AvailabilityStatus status) {
+    public DriverProfileResponse updateAvailability(String id, AvailabilityStatus status) {
         DriverProfile profile = driverProfileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Driver profile not found with ID: " + id));
 
@@ -92,7 +89,7 @@ public class DriverService {
         return new DriverProfileResponse(updated);
     }
 
-    public DriverProfileResponse updateLocation(Long id, UpdateLocationRequest request) {
+    public DriverProfileResponse updateLocation(String id, UpdateLocationRequest request) {
         DriverProfile profile = driverProfileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Driver profile not found with ID: " + id));
 
@@ -106,7 +103,6 @@ public class DriverService {
         return new DriverProfileResponse(updated);
     }
 
-    @Transactional(readOnly = true)
     public List<DriverProfileResponse> getAvailableDrivers(String serviceArea) {
         List<DriverProfile> drivers;
         if (serviceArea != null && !serviceArea.isBlank()) {

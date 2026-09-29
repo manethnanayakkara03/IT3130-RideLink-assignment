@@ -6,9 +6,9 @@ import com.ridelink.ride.model.RideStatus;
 import java.time.LocalDateTime;
 
 public class RideResponse {
-    private Long id;
-    private Long passengerId;
-    private Long driverId;
+    private String id;
+    private String passengerId;
+    private String driverId;
     private String pickupLocation;
     private Double pickupLatitude;
     private Double pickupLongitude;
@@ -51,27 +51,27 @@ public class RideResponse {
         this.cancellationReason = ride.getCancellationReason();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public void setPassengerId(Long passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 
-    public Long getDriverId() {
+    public String getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Long driverId) {
+    public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
 

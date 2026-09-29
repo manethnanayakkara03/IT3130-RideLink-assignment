@@ -48,13 +48,13 @@ public class JwtTokenProvider {
         return claims.getSubject();
     }
 
-    public Long getUserId(String token) {
+    public String getUserId(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(key())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        return claims.get("userId", Long.class);
+        return claims.get("userId", String.class);
     }
 
     public String getRole(String token) {

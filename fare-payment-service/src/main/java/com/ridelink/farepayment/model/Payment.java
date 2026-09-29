@@ -1,46 +1,35 @@
 package com.ridelink.farepayment.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "payments")
+@Document(collection = "payments")
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
-    private Long rideId;
-
-    @Column(nullable = false)
-    private Long passengerId;
-
-    @Column(nullable = false)
+    private String rideId;
+    private String passengerId;
     private Double amount;
-
-    @Column(nullable = false, length = 50)
     private String paymentMethod;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
     private PaymentStatus status;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Indexed(unique = true)
     private String transactionReference;
 
     private String simulatedFailureReason;
-
     private LocalDateTime paidAt;
-
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     public Payment() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    public Payment(Long rideId, Long passengerId, Double amount, String paymentMethod,
+    public Payment(String rideId, String passengerId, Double amount, String paymentMethod,
                    PaymentStatus status, String transactionReference) {
         this.rideId = rideId;
         this.passengerId = passengerId;
@@ -48,34 +37,30 @@ public class Payment {
         this.paymentMethod = paymentMethod;
         this.status = status;
         this.transactionReference = transactionReference;
-    }
-
-    @PrePersist
-    protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 
-    public Long getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public void setPassengerId(Long passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 

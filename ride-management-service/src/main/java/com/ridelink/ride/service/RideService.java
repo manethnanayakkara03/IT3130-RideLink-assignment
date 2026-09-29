@@ -10,7 +10,6 @@ import com.ridelink.ride.model.Ride;
 import com.ridelink.ride.model.RideStatus;
 import com.ridelink.ride.repository.RideRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class RideService {
 
     private final RideRepository rideRepository;
@@ -34,10 +32,11 @@ public class RideService {
     }
 
     public RideResponse createRide(CreateRideRequest request) {
-        double distanceKm = calculateDistanceKm(
-                request.getPickupLatitude(), request.getPickupLongitude(),
-                request.getDestinationLatitude(), request.getDestinationLongitude()
-        );
+        double distanceKm = (request.getPickupLatitude() != null && request.getPickupLongitude() != null
+                && request.getDestinationLatitude() != null && request.getDestinationLongitude() != null)
+                ? calculateDistanceKm(request.getPickupLatitude(), request.getPickupLongitude(),
+                                      request.getDestinationLatitude(), request.getDestinationLongitude())
+                : 5.0; // default 5.0 km if coordinates not specified
         double estimatedMinutes = Math.max(5.0, distanceKm * 2.5); // simulated speed
 
         // Inter-service call to Fare Service for estimate
@@ -59,7 +58,7 @@ public class RideService {
         return new RideResponse(saved);
     }
 
-    public RideResponse assignDriver(Long rideId) {
+    public RideResponse assignDriver(String rideId) {
         Ride ride = rideRepository.findById(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + rideId));
 
@@ -85,7 +84,7 @@ public class RideService {
         return new RideResponse(updated);
     }
 
-    public RideResponse acceptRide(Long rideId) {
+    public RideResponse acceptRide(String rideId) {
         Ride ride = rideRepository.findById(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + rideId));
 
@@ -100,7 +99,7 @@ public class RideService {
         return new RideResponse(updated);
     }
 
-    public RideResponse startRide(Long rideId) {
+    public RideResponse startRide(String rideId) {
         Ride ride = rideRepository.findById(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + rideId));
 
@@ -115,7 +114,7 @@ public class RideService {
         return new RideResponse(updated);
     }
 
-    public RideResponse completeRide(Long rideId) {
+    public RideResponse completeRide(String rideId) {
         Ride ride = rideRepository.findById(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + rideId));
 
@@ -128,10 +127,11 @@ public class RideService {
         ride.setStatus(RideStatus.COMPLETED);
 
         // Calculate actual distance & duration
-        double distanceKm = calculateDistanceKm(
-                ride.getPickupLatitude(), ride.getPickupLongitude(),
-                ride.getDestinationLatitude(), ride.getDestinationLongitude()
-        );
+        double distanceKm = (ride.getPickupLatitude() != null && ride.getPickupLongitude() != null
+                && ride.getDestinationLatitude() != null && ride.getDestinationLongitude() != null)
+                ? calculateDistanceKm(ride.getPickupLatitude(), ride.getPickupLongitude(),
+                                      ride.getDestinationLatitude(), ride.getDestinationLongitude())
+                : 5.0;
 
         double durationMinutes = 15.0; // default duration
         if (ride.getStartedAt() != null) {
@@ -156,7 +156,7 @@ public class RideService {
         return new RideResponse(updated);
     }
 
-    public RideResponse cancelRide(Long rideId, CancelRideRequest request) {
+    public RideResponse cancelRide(String rideId, CancelRideRequest request) {
         Ride ride = rideRepository.findById(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + rideId));
 
@@ -178,22 +178,19 @@ public class RideService {
         return new RideResponse(updated);
     }
 
-    @Transactional(readOnly = true)
-    public RideResponse getRideById(Long id) {
+    public RideResponse getRideById(String id) {
         Ride ride = rideRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ride not found with ID: " + id));
         return new RideResponse(ride);
     }
 
-    @Transactional(readOnly = true)
-    public List<RideResponse> getRidesByPassengerId(Long passengerId) {
+    public List<RideResponse> getRidesByPassengerId(String passengerId) {
         return rideRepository.findByPassengerIdOrderByRequestedAtDesc(passengerId).stream()
                 .map(RideResponse::new)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public List<RideResponse> getRidesByDriverId(Long driverId) {
+    public List<RideResponse> getRidesByDriverId(String driverId) {
         return rideRepository.findByDriverIdOrderByRequestedAtDesc(driverId).stream()
                 .map(RideResponse::new)
                 .collect(Collectors.toList());

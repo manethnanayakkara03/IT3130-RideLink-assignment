@@ -41,7 +41,7 @@ public class FareServiceClient {
         }
     }
 
-    public FareResponseDto calculateFinalFare(Long rideId, Double distanceKm, Double durationMinutes) {
+    public FareResponseDto calculateFinalFare(String rideId, Double distanceKm, Double durationMinutes) {
         try {
             return restClient.post()
                     .uri("/api/fares/final")

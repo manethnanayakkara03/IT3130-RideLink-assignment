@@ -5,14 +5,14 @@ import com.ridelink.account.model.Role;
 
 public class ExistsResponse {
     private boolean exists;
-    private Long id;
+    private String id;
     private Role role;
     private AccountStatus status;
 
     public ExistsResponse() {
     }
 
-    public ExistsResponse(boolean exists, Long id, Role role, AccountStatus status) {
+    public ExistsResponse(boolean exists, String id, Role role, AccountStatus status) {
         this.exists = exists;
         this.id = id;
         this.role = role;
@@ -27,11 +27,11 @@ public class ExistsResponse {
         this.exists = exists;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

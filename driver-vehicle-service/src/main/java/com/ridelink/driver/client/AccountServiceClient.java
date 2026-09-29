@@ -19,7 +19,7 @@ public class AccountServiceClient {
                 .build();
     }
 
-    public AccountVerificationDto verifyAccount(Long accountId) {
+    public AccountVerificationDto verifyAccount(String accountId) {
         try {
             return restClient.get()
                     .uri("/api/accounts/{id}/exists", accountId)

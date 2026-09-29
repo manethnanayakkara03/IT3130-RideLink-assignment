@@ -3,8 +3,8 @@ package com.ridelink.farepayment.dto;
 import com.ridelink.farepayment.model.FareRecord;
 
 public class FareResponse {
-    private Long id;
-    private Long rideId;
+    private String id;
+    private String rideId;
     private Double baseFare;
     private Double distanceKm;
     private Double distanceCharge;
@@ -28,19 +28,19 @@ public class FareResponse {
         this.isEstimate = record.getIsEstimate();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 
