@@ -44,7 +44,7 @@ class FareServiceTest {
 
         when(fareRecordRepository.save(any(FareRecord.class))).thenAnswer(invocation -> {
             FareRecord record = invocation.getArgument(0);
-            record.setId(1L);
+            record.setId("fare-est-001");
             return record;
         });
 
@@ -63,20 +63,20 @@ class FareServiceTest {
     @Test
     @DisplayName("Should accurately calculate final fare for completed ride")
     void testCalculateFinalFare_Success() {
-        // Ride: 5, Distance: 15.5 km, Time: 30 min
+        // Ride: ride-005, Distance: 15.5 km, Time: 30 min
         // Formula: 150 + (15.5 * 80) + (30 * 5) = 150 + 1240 + 150 = 1540.0
-        FareCalculateRequest request = new FareCalculateRequest(5L, 15.5, 30.0);
+        FareCalculateRequest request = new FareCalculateRequest("ride-005", 15.5, 30.0);
 
         when(fareRecordRepository.save(any(FareRecord.class))).thenAnswer(invocation -> {
             FareRecord record = invocation.getArgument(0);
-            record.setId(2L);
+            record.setId("fare-rec-002");
             return record;
         });
 
         FareResponse response = fareService.calculateFinalFare(request);
 
         assertNotNull(response);
-        assertEquals(5L, response.getRideId());
+        assertEquals("ride-005", response.getRideId());
         assertEquals(1540.0, response.getTotalFare());
         assertFalse(response.getIsEstimate());
     }

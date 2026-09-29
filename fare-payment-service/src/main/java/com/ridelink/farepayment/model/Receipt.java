@@ -1,38 +1,33 @@
 package com.ridelink.farepayment.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "receipts")
+@Document(collection = "receipts")
 public class Receipt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, unique = true)
-    private Long paymentId;
+    @Indexed(unique = true)
+    private String paymentId;
 
-    @Column(nullable = false)
-    private Long rideId;
+    private String rideId;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Indexed(unique = true)
     private String receiptNumber;
 
-    @Column(nullable = false)
     private Double amount;
-
-    @Column(nullable = false)
     private LocalDateTime issuedAt;
-
-    @Column(length = 1000)
     private String details;
 
     public Receipt() {
     }
 
-    public Receipt(Long paymentId, Long rideId, String receiptNumber, Double amount, LocalDateTime issuedAt, String details) {
+    public Receipt(String paymentId, String rideId, String receiptNumber, Double amount, LocalDateTime issuedAt, String details) {
         this.paymentId = paymentId;
         this.rideId = rideId;
         this.receiptNumber = receiptNumber;
@@ -41,27 +36,27 @@ public class Receipt {
         this.details = details;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 

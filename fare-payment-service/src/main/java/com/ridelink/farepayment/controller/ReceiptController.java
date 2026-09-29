@@ -32,7 +32,7 @@ public class ReceiptController {
                     content = @Content(schema = @Schema(implementation = ReceiptResponse.class))),
             @ApiResponse(responseCode = "404", description = "Receipt not found for payment")
     })
-    public ResponseEntity<ReceiptResponse> getReceiptByPaymentId(@PathVariable Long paymentId) {
+    public ResponseEntity<ReceiptResponse> getReceiptByPaymentId(@PathVariable String paymentId) {
         return ResponseEntity.ok(receiptService.getReceiptByPaymentId(paymentId));
     }
 
@@ -43,7 +43,7 @@ public class ReceiptController {
                     content = @Content(schema = @Schema(implementation = ReceiptResponse.class))),
             @ApiResponse(responseCode = "404", description = "Receipt not found for ride")
     })
-    public ResponseEntity<ReceiptResponse> getReceiptByRideId(@PathVariable Long rideId) {
+    public ResponseEntity<ReceiptResponse> getReceiptByRideId(@PathVariable String rideId) {
         return ResponseEntity.ok(receiptService.getReceiptByRideId(rideId));
     }
 }

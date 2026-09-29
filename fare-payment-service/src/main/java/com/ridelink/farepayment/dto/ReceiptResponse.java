@@ -5,9 +5,9 @@ import com.ridelink.farepayment.model.Receipt;
 import java.time.LocalDateTime;
 
 public class ReceiptResponse {
-    private Long id;
-    private Long paymentId;
-    private Long rideId;
+    private String id;
+    private String paymentId;
+    private String rideId;
     private String receiptNumber;
     private Double amount;
     private LocalDateTime issuedAt;
@@ -26,27 +26,27 @@ public class ReceiptResponse {
         this.details = receipt.getDetails();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 

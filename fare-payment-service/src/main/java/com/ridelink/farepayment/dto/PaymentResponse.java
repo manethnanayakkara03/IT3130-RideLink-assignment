@@ -6,9 +6,9 @@ import com.ridelink.farepayment.model.PaymentStatus;
 import java.time.LocalDateTime;
 
 public class PaymentResponse {
-    private Long id;
-    private Long rideId;
-    private Long passengerId;
+    private String id;
+    private String rideId;
+    private String passengerId;
     private Double amount;
     private String paymentMethod;
     private PaymentStatus status;
@@ -33,27 +33,27 @@ public class PaymentResponse {
         this.createdAt = payment.getCreatedAt();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getRideId() {
+    public String getRideId() {
         return rideId;
     }
 
-    public void setRideId(Long rideId) {
+    public void setRideId(String rideId) {
         this.rideId = rideId;
     }
 
-    public Long getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public void setPassengerId(Long passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 

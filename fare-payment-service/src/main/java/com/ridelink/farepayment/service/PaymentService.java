@@ -2,19 +2,16 @@ package com.ridelink.farepayment.service;
 
 import com.ridelink.farepayment.dto.PaymentResponse;
 import com.ridelink.farepayment.dto.SimulatePaymentRequest;
-import com.ridelink.farepayment.exception.PaymentException;
 import com.ridelink.farepayment.exception.ResourceNotFoundException;
 import com.ridelink.farepayment.model.Payment;
 import com.ridelink.farepayment.model.PaymentStatus;
 import com.ridelink.farepayment.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
@@ -55,15 +52,13 @@ public class PaymentService {
         return new PaymentResponse(saved);
     }
 
-    @Transactional(readOnly = true)
-    public PaymentResponse getPaymentById(Long id) {
+    public PaymentResponse getPaymentById(String id) {
         Payment payment = paymentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Payment record not found with ID: " + id));
         return new PaymentResponse(payment);
     }
 
-    @Transactional(readOnly = true)
-    public PaymentResponse getPaymentByRideId(Long rideId) {
+    public PaymentResponse getPaymentByRideId(String rideId) {
         Payment payment = paymentRepository.findFirstByRideIdOrderByCreatedAtDesc(rideId)
                 .orElseThrow(() -> new ResourceNotFoundException("Payment record not found for ride ID: " + rideId));
         return new PaymentResponse(payment);
