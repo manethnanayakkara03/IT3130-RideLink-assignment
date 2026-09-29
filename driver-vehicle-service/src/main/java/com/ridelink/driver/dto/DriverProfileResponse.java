@@ -6,8 +6,8 @@ import com.ridelink.driver.model.DriverProfile;
 import java.time.LocalDateTime;
 
 public class DriverProfileResponse {
-    private Long id;
-    private Long accountId;
+    private String id;
+    private String accountId;
     private String licenseNumber;
     private AvailabilityStatus availabilityStatus;
     private String serviceArea;
@@ -31,19 +31,19 @@ public class DriverProfileResponse {
         this.updatedAt = profile.getUpdatedAt();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

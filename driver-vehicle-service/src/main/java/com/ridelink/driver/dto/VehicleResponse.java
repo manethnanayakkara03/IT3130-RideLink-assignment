@@ -6,8 +6,8 @@ import com.ridelink.driver.model.VehicleStatus;
 import java.time.LocalDateTime;
 
 public class VehicleResponse {
-    private Long id;
-    private Long driverId;
+    private String id;
+    private String driverId;
     private String registrationNumber;
     private String make;
     private String model;
@@ -35,19 +35,19 @@ public class VehicleResponse {
         this.updatedAt = vehicle.getUpdatedAt();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getDriverId() {
+    public String getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Long driverId) {
+    public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
 

@@ -1,51 +1,38 @@
 package com.ridelink.driver.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "vehicles")
+@Document(collection = "vehicles")
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
-    private Long driverId;
+    private String driverId;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Indexed(unique = true)
     private String registrationNumber;
 
-    @Column(nullable = false, length = 50)
     private String make;
-
-    @Column(nullable = false, length = 50)
     private String model;
-
-    @Column(nullable = false, length = 30)
     private String vehicleType;
-
-    @Column(nullable = false, length = 30)
     private String colour;
-
-    @Column(nullable = false)
     private Integer seatCapacity;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
     private VehicleStatus status;
-
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     public Vehicle() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status = VehicleStatus.ACTIVE;
     }
 
-    public Vehicle(Long driverId, String registrationNumber, String make, String model,
+    public Vehicle(String driverId, String registrationNumber, String make, String model,
                    String vehicleType, String colour, Integer seatCapacity, VehicleStatus status) {
         this.driverId = driverId;
         this.registrationNumber = registrationNumber;
@@ -54,36 +41,24 @@ public class Vehicle {
         this.vehicleType = vehicleType;
         this.colour = colour;
         this.seatCapacity = seatCapacity;
-        this.status = status;
-    }
-
-    @PrePersist
-    protected void onCreate() {
+        this.status = status != null ? status : VehicleStatus.ACTIVE;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = VehicleStatus.ACTIVE;
-        }
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getDriverId() {
+    public String getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Long driverId) {
+    public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
 
@@ -141,6 +116,7 @@ public class Vehicle {
 
     public void setStatus(VehicleStatus status) {
         this.status = status;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public LocalDateTime getCreatedAt() {

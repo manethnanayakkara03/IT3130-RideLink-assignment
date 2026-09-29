@@ -45,8 +45,8 @@ class VehicleServiceTest {
 
     @BeforeEach
     void setUp() {
-        sampleVehicle = new Vehicle(1L, "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4, VehicleStatus.ACTIVE);
-        sampleVehicle.setId(100L);
+        sampleVehicle = new Vehicle("drv-001", "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4, VehicleStatus.ACTIVE);
+        sampleVehicle.setId("veh-100");
         sampleVehicle.setCreatedAt(LocalDateTime.now());
         sampleVehicle.setUpdatedAt(LocalDateTime.now());
     }
@@ -55,17 +55,17 @@ class VehicleServiceTest {
     @DisplayName("Should register vehicle when driver exists and registration number is unique")
     void testRegisterVehicle_Success() {
         CreateVehicleRequest request = new CreateVehicleRequest(
-                1L, "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
+                "drv-001", "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
         );
 
-        when(driverProfileRepository.existsById(1L)).thenReturn(true);
+        when(driverProfileRepository.existsById("drv-001")).thenReturn(true);
         when(vehicleRepository.existsByRegistrationNumber("WP-CAD-1234")).thenReturn(false);
         when(vehicleRepository.save(any(Vehicle.class))).thenReturn(sampleVehicle);
 
         VehicleResponse response = vehicleService.registerVehicle(request);
 
         assertNotNull(response);
-        assertEquals(100L, response.getId());
+        assertEquals("veh-100", response.getId());
         assertEquals("WP-CAD-1234", response.getRegistrationNumber());
         assertEquals("Prius", response.getModel());
     }
@@ -74,10 +74,10 @@ class VehicleServiceTest {
     @DisplayName("Should throw ResourceNotFoundException when registering vehicle for non-existent driver")
     void testRegisterVehicle_DriverNotFound() {
         CreateVehicleRequest request = new CreateVehicleRequest(
-                999L, "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
+                "drv-nonexistent", "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
         );
 
-        when(driverProfileRepository.existsById(999L)).thenReturn(false);
+        when(driverProfileRepository.existsById("drv-nonexistent")).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> vehicleService.registerVehicle(request));
     }
@@ -86,10 +86,10 @@ class VehicleServiceTest {
     @DisplayName("Should throw DuplicateResourceException when registration number already exists")
     void testRegisterVehicle_DuplicateRegistration() {
         CreateVehicleRequest request = new CreateVehicleRequest(
-                1L, "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
+                "drv-001", "WP-CAD-1234", "Toyota", "Prius", "SEDAN", "White", 4
         );
 
-        when(driverProfileRepository.existsById(1L)).thenReturn(true);
+        when(driverProfileRepository.existsById("drv-001")).thenReturn(true);
         when(vehicleRepository.existsByRegistrationNumber("WP-CAD-1234")).thenReturn(true);
 
         assertThrows(DuplicateResourceException.class, () -> vehicleService.registerVehicle(request));
@@ -98,12 +98,12 @@ class VehicleServiceTest {
     @Test
     @DisplayName("Should retrieve vehicle by ID")
     void testGetVehicleById_Success() {
-        when(vehicleRepository.findById(100L)).thenReturn(Optional.of(sampleVehicle));
+        when(vehicleRepository.findById("veh-100")).thenReturn(Optional.of(sampleVehicle));
 
-        VehicleResponse response = vehicleService.getVehicleById(100L);
+        VehicleResponse response = vehicleService.getVehicleById("veh-100");
 
         assertNotNull(response);
-        assertEquals(100L, response.getId());
+        assertEquals("veh-100", response.getId());
         assertEquals("Toyota", response.getMake());
     }
 
@@ -111,10 +111,10 @@ class VehicleServiceTest {
     @DisplayName("Should update vehicle details")
     void testUpdateVehicle_Success() {
         UpdateVehicleRequest request = new UpdateVehicleRequest("Toyota", "Aqua", "HATCHBACK", "Silver", 4, VehicleStatus.ACTIVE);
-        when(vehicleRepository.findById(100L)).thenReturn(Optional.of(sampleVehicle));
+        when(vehicleRepository.findById("veh-100")).thenReturn(Optional.of(sampleVehicle));
         when(vehicleRepository.save(any(Vehicle.class))).thenReturn(sampleVehicle);
 
-        VehicleResponse response = vehicleService.updateVehicle(100L, request);
+        VehicleResponse response = vehicleService.updateVehicle("veh-100", request);
 
         assertNotNull(response);
         assertEquals("Aqua", sampleVehicle.getModel());
@@ -124,10 +124,10 @@ class VehicleServiceTest {
     @Test
     @DisplayName("Should get all vehicles for a driver")
     void testGetVehiclesByDriverId() {
-        when(driverProfileRepository.existsById(1L)).thenReturn(true);
-        when(vehicleRepository.findByDriverId(1L)).thenReturn(List.of(sampleVehicle));
+        when(driverProfileRepository.existsById("drv-001")).thenReturn(true);
+        when(vehicleRepository.findByDriverId("drv-001")).thenReturn(List.of(sampleVehicle));
 
-        List<VehicleResponse> list = vehicleService.getVehiclesByDriverId(1L);
+        List<VehicleResponse> list = vehicleService.getVehiclesByDriverId("drv-001");
 
         assertEquals(1, list.size());
         assertEquals("WP-CAD-1234", list.get(0).getRegistrationNumber());

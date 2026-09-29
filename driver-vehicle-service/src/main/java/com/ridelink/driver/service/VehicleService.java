@@ -9,13 +9,11 @@ import com.ridelink.driver.model.Vehicle;
 import com.ridelink.driver.repository.DriverProfileRepository;
 import com.ridelink.driver.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
@@ -51,14 +49,13 @@ public class VehicleService {
         return new VehicleResponse(saved);
     }
 
-    @Transactional(readOnly = true)
-    public VehicleResponse getVehicleById(Long id) {
+    public VehicleResponse getVehicleById(String id) {
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found with ID: " + id));
         return new VehicleResponse(vehicle);
     }
 
-    public VehicleResponse updateVehicle(Long id, UpdateVehicleRequest request) {
+    public VehicleResponse updateVehicle(String id, UpdateVehicleRequest request) {
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found with ID: " + id));
 
@@ -73,8 +70,7 @@ public class VehicleService {
         return new VehicleResponse(updated);
     }
 
-    @Transactional(readOnly = true)
-    public List<VehicleResponse> getVehiclesByDriverId(Long driverId) {
+    public List<VehicleResponse> getVehiclesByDriverId(String driverId) {
         if (!driverProfileRepository.existsById(driverId)) {
             throw new ResourceNotFoundException("Driver profile not found with ID: " + driverId);
         }

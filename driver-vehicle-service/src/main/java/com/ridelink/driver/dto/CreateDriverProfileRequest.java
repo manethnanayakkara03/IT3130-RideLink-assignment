@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class CreateDriverProfileRequest {
 
-    @NotNull(message = "Account ID is required")
-    private Long accountId;
+    @NotBlank(message = "Account ID is required")
+    private String accountId;
 
     @NotBlank(message = "License number is required")
     private String licenseNumber;
@@ -23,7 +23,7 @@ public class CreateDriverProfileRequest {
     public CreateDriverProfileRequest() {
     }
 
-    public CreateDriverProfileRequest(Long accountId, String licenseNumber, String serviceArea, Double latitude, Double longitude) {
+    public CreateDriverProfileRequest(String accountId, String licenseNumber, String serviceArea, Double latitude, Double longitude) {
         this.accountId = accountId;
         this.licenseNumber = licenseNumber;
         this.serviceArea = serviceArea;
@@ -31,11 +31,11 @@ public class CreateDriverProfileRequest {
         this.longitude = longitude;
     }
 
-    public Long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

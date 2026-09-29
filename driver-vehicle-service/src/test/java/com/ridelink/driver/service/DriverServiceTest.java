@@ -44,8 +44,8 @@ class DriverServiceTest {
 
     @BeforeEach
     void setUp() {
-        sampleDriver = new DriverProfile(10L, "B1234567", AvailabilityStatus.AVAILABLE, "Colombo", 6.9271, 79.8612);
-        sampleDriver.setId(1L);
+        sampleDriver = new DriverProfile("acc-driver-010", "B1234567", AvailabilityStatus.AVAILABLE, "Colombo", 6.9271, 79.8612);
+        sampleDriver.setId("drv-001");
         sampleDriver.setCreatedAt(LocalDateTime.now());
         sampleDriver.setUpdatedAt(LocalDateTime.now());
     }
@@ -54,20 +54,20 @@ class DriverServiceTest {
     @DisplayName("Should successfully create a driver profile when account is verified")
     void testCreateDriverProfile_Success() {
         CreateDriverProfileRequest request = new CreateDriverProfileRequest(
-                10L, "B1234567", "Colombo", 6.9271, 79.8612
+                "acc-driver-010", "B1234567", "Colombo", 6.9271, 79.8612
         );
 
-        when(driverProfileRepository.existsByAccountId(10L)).thenReturn(false);
+        when(driverProfileRepository.existsByAccountId("acc-driver-010")).thenReturn(false);
         when(driverProfileRepository.existsByLicenseNumber("B1234567")).thenReturn(false);
-        when(accountServiceClient.verifyAccount(10L))
-                .thenReturn(new AccountVerificationDto(true, 10L, "DRIVER", "ACTIVE"));
+        when(accountServiceClient.verifyAccount("acc-driver-010"))
+                .thenReturn(new AccountVerificationDto(true, "acc-driver-010", "DRIVER", "ACTIVE"));
         when(driverProfileRepository.save(any(DriverProfile.class))).thenReturn(sampleDriver);
 
         DriverProfileResponse response = driverService.createDriverProfile(request);
 
         assertNotNull(response);
-        assertEquals(1L, response.getId());
-        assertEquals(10L, response.getAccountId());
+        assertEquals("drv-001", response.getId());
+        assertEquals("acc-driver-010", response.getAccountId());
         assertEquals("B1234567", response.getLicenseNumber());
         assertEquals(AvailabilityStatus.AVAILABLE, response.getAvailabilityStatus());
         verify(driverProfileRepository, times(1)).save(any(DriverProfile.class));
@@ -77,12 +77,12 @@ class DriverServiceTest {
     @DisplayName("Should throw ResourceNotFoundException when Account Service indicates account does not exist")
     void testCreateDriverProfile_AccountNotFound() {
         CreateDriverProfileRequest request = new CreateDriverProfileRequest(
-                99L, "B9999999", "Colombo", 6.9271, 79.8612
+                "acc-nonexistent", "B9999999", "Colombo", 6.9271, 79.8612
         );
 
-        when(driverProfileRepository.existsByAccountId(99L)).thenReturn(false);
+        when(driverProfileRepository.existsByAccountId("acc-nonexistent")).thenReturn(false);
         when(driverProfileRepository.existsByLicenseNumber("B9999999")).thenReturn(false);
-        when(accountServiceClient.verifyAccount(99L))
+        when(accountServiceClient.verifyAccount("acc-nonexistent"))
                 .thenReturn(new AccountVerificationDto(false, null, null, null));
 
         assertThrows(ResourceNotFoundException.class, () -> driverService.createDriverProfile(request));
@@ -92,13 +92,13 @@ class DriverServiceTest {
     @DisplayName("Should throw InvalidDriverStateException when Account has role other than DRIVER")
     void testCreateDriverProfile_NotADriver() {
         CreateDriverProfileRequest request = new CreateDriverProfileRequest(
-                10L, "B1234567", "Colombo", 6.9271, 79.8612
+                "acc-passenger-001", "B1234567", "Colombo", 6.9271, 79.8612
         );
 
-        when(driverProfileRepository.existsByAccountId(10L)).thenReturn(false);
+        when(driverProfileRepository.existsByAccountId("acc-passenger-001")).thenReturn(false);
         when(driverProfileRepository.existsByLicenseNumber("B1234567")).thenReturn(false);
-        when(accountServiceClient.verifyAccount(10L))
-                .thenReturn(new AccountVerificationDto(true, 10L, "PASSENGER", "ACTIVE"));
+        when(accountServiceClient.verifyAccount("acc-passenger-001"))
+                .thenReturn(new AccountVerificationDto(true, "acc-passenger-001", "PASSENGER", "ACTIVE"));
 
         assertThrows(InvalidDriverStateException.class, () -> driverService.createDriverProfile(request));
     }
@@ -107,10 +107,10 @@ class DriverServiceTest {
     @DisplayName("Should throw DuplicateResourceException when profile already exists for account")
     void testCreateDriverProfile_DuplicateAccount() {
         CreateDriverProfileRequest request = new CreateDriverProfileRequest(
-                10L, "B1234567", "Colombo", 6.9271, 79.8612
+                "acc-driver-010", "B1234567", "Colombo", 6.9271, 79.8612
         );
 
-        when(driverProfileRepository.existsByAccountId(10L)).thenReturn(true);
+        when(driverProfileRepository.existsByAccountId("acc-driver-010")).thenReturn(true);
 
         assertThrows(DuplicateResourceException.class, () -> driverService.createDriverProfile(request));
     }
@@ -118,10 +118,10 @@ class DriverServiceTest {
     @Test
     @DisplayName("Should update driver availability successfully")
     void testUpdateAvailability_Success() {
-        when(driverProfileRepository.findById(1L)).thenReturn(Optional.of(sampleDriver));
+        when(driverProfileRepository.findById("drv-001")).thenReturn(Optional.of(sampleDriver));
         when(driverProfileRepository.save(any(DriverProfile.class))).thenReturn(sampleDriver);
 
-        DriverProfileResponse response = driverService.updateAvailability(1L, AvailabilityStatus.BUSY);
+        DriverProfileResponse response = driverService.updateAvailability("drv-001", AvailabilityStatus.BUSY);
 
         assertNotNull(response);
         assertEquals(AvailabilityStatus.BUSY, sampleDriver.getAvailabilityStatus());
@@ -131,10 +131,10 @@ class DriverServiceTest {
     @DisplayName("Should update simulated location successfully")
     void testUpdateLocation_Success() {
         UpdateLocationRequest request = new UpdateLocationRequest(6.9319, 79.8478, "Fort");
-        when(driverProfileRepository.findById(1L)).thenReturn(Optional.of(sampleDriver));
+        when(driverProfileRepository.findById("drv-001")).thenReturn(Optional.of(sampleDriver));
         when(driverProfileRepository.save(any(DriverProfile.class))).thenReturn(sampleDriver);
 
-        DriverProfileResponse response = driverService.updateLocation(1L, request);
+        DriverProfileResponse response = driverService.updateLocation("drv-001", request);
 
         assertNotNull(response);
         assertEquals(6.9319, sampleDriver.getLatitude());
