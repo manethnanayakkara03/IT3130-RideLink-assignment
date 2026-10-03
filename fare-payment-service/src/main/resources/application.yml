@@ -1,0 +1,32 @@
+server:
+  port: ${PORT:8084}
+
+spring:
+  application:
+    name: fare-payment-service
+  data:
+    mongodb:
+      uri: ${MONGODB_FARE_URI:${MONGODB_URI:mongodb://${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_FARE_DATABASE:ridelink_fare_payment_db}}}
+      database: ${MONGODB_FARE_DATABASE:ridelink_fare_payment_db}
+      auto-index-creation: true
+
+services:
+  ride-service:
+    url: ${RIDE_SERVICE_URL:http://localhost:8083}
+
+fare:
+  base: ${FARE_BASE:150.0}
+  rate-per-km: ${FARE_RATE_PER_KM:80.0}
+  rate-per-minute: ${FARE_RATE_PER_MINUTE:5.0}
+
+ridelink:
+  fare:
+    base-fare: ${fare.base}
+    rate-per-km: ${fare.rate-per-km}
+    rate-per-minute: ${fare.rate-per-minute}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html

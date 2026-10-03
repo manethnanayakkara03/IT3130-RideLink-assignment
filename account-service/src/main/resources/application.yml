@@ -6,9 +6,9 @@ spring:
     name: account-service
   data:
     mongodb:
-      uri: ${MONGODB_ACCOUNT_URI:${MONGODB_URI:mongodb+srv://thisajas_db_user:1234@cluster0.gwzawxa.mongodb.net/ridelink_account_db?appName=Cluster0}}
+> main
       database: ${MONGODB_ACCOUNT_DATABASE:ridelink_account_db}
-      auto-index-creation: true
+      auto-index-creation: 
 
 jwt:
   secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B59703273357638792F423F4528482B4D6251}
